@@ -16,7 +16,7 @@ int quantidadeImpares(lista *lt);
 lista *uniaoLista(lista *lt1, lista *lt2);
 int contemElemento(lista *list, int valor);
 void imprimeLista(const lista *lt);
-lista *apagaLista(lista *aux); // Renomeei para freeList para consistência com o exemplo anterior
+lista *apagaLista(lista *aux); 
 void menu();
 
 
@@ -33,8 +33,8 @@ lista *inicializa(){
 lista *criaLista(int valor){ //funcao para criar novo no
     lista *temp = (lista*)malloc(sizeof(lista)); //aloca o tamanho de lista
     if(temp == NULL){
-        printf("erro ao alocar memória\n"); // <<--- Adicionado '\n'
-        exit(EXIT_FAILURE);
+        printf("erro ao alocar memória\n"); // Verifica se a alocação foi bem-sucedida
+        exit(-1);
     }
     temp->info = valor;
     temp->prox = NULL; //o proximo no do novo no e inicialmente NULL
@@ -134,7 +134,7 @@ lista *uniaoLista(lista *lt1, lista *lt2){
 
     //processar a segunda lista
     lista *atual2 = lt2;
-    while(atual2 != NULL){ // <<--- Loop while correto
+    while(atual2 != NULL){ 
         if(!contemElemento(uniao, atual2->info)){
             insereFinal(&uniao, atual2->info);
         }
@@ -262,5 +262,5 @@ void menu(){
     listaA = apagaLista(listaA);
     listaB = apagaLista(listaB);
     listaUniao = apagaLista(listaUniao);
-    printf("Todas as listas foram liberadas. Adeus!\n");
+    printf("Todas as listas foram liberadas. Encerrando!\n");
 }
