@@ -1,6 +1,23 @@
 #include "Fila.h"
+#include "Pilha.h" // Se Pilha não for usada, pode remover
 #include <stdio.h>
 #include <stdlib.h>
+
+// Sua função pilhasMaiorQue20 (apenas para referência, estava comentada)
+void pilhasMaiorQue20(Fila* f, Pilha** pMaior, Pilha** pMenor) {
+    *pMaior = CriaPilha();
+    *pMenor = CriaPilha();
+    if (vaziaFila(f)) return;
+
+    while(!vaziaFila(f)){
+        int valor = retiraFila(f);
+        if(valor > 20){
+            push(*pMaior, valor);
+        } else {
+            push(*pMenor, valor);
+        }
+    }
+}
 
 int main(){
     Fila* f = criaFila();
@@ -11,27 +28,29 @@ int main(){
     insereFila(f, 25);
     insereFila(f, 30);
 
+
     printf("Fila original: ");
-    imprimeFila(f);
+    imprimeFila(f); // Fila: [10, 15, 20, 25, 30]
 
     Fila* fPares;
     Fila* fImpares;
-    separaParesImpares(f, &fPares, &fImpares);
+    separaParesImpares(f, &fPares, &fImpares); // 'f' continua [10, 15, 20, 25, 30]
 
     printf("Fila de pares: ");
     imprimeFila(fPares);
     printf("Fila de impares: ");
     imprimeFila(fImpares);
 
-    Fila* fInvertida = inverteFila(f);
-    printf("Fila invertida: ");
-    imprimeFila(fInvertida);
+    
+    inverteFila(f); // 'f' agora é [30, 25, 20, 15, 10]
+    printf("Fila invertida (a fila original 'f' agora esta invertida): ");
+    imprimeFila(f); // Imprime a fila 'f' invertida
 
-    // Libera a memória
+
     clearFila(f);
     clearFila(fPares);
     clearFila(fImpares);
-    clearFila(fInvertida);
+
 
     return 0;
 }

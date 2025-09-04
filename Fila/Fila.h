@@ -165,31 +165,17 @@ void separaParesImpares(Fila* f, Fila** filaPares, Fila** filaImpares){
 
 // Elabore uma função que inverta uma fila
 Fila *inverteFila(Fila* f){
-    if(vaziaFila(f) || f->ini->prox == NULL) return f;
-
-    // Usando uma pilha para inverter a fila
-    Nos* pilha = NULL;
-    Nos* q = f->ini;
-
-    // Empilha todos os elementos da fila
-    while(q != NULL){
-        Nos* novo = (Nos*)malloc(sizeof(Nos));
-        novo->info = q->info;
-        novo->prox = pilha;
-        pilha = novo;
-        q = q->prox;
+    
+    if(vaziaFila(f)){
+        return f;
     }
+   int elemento = retiraFila(f);
 
-    // Cria nova fila invertida
-    Fila *fInvertida = criaFila();
-    while(pilha != NULL){
-        insereFila(fInvertida, pilha->info);
-        Nos* temp = pilha;
-        pilha = pilha->prox;
-        free(temp);
-    }
+   f = inverteFila(f);
 
-    return fInvertida;
+   insereFila(f, elemento);
+
+   return f;
 }
 
 
